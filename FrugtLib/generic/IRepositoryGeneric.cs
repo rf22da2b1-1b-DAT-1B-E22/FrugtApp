@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FrugtLib.generic
 {
-    public interface IRepositoryGeneric<T>
+    public interface IRepositoryGeneric<T> where T : AbstractModelClass
     {
         List<T> GetAll();
         T GetById(int id);

@@ -46,29 +46,64 @@ catch(KeyNotFoundException knfe)
 /*
  * Prøver Frugt Repository med Generic interface
  */
-IRepositoryGeneric<Frugt> repositoryGenericInterface = new FrugtRepositoryUsingGenericInterface();
-repositoryGenericInterface.Create(banan);
-repositoryGenericInterface.Create(æble);
+IRepositoryGeneric<NyFrugt> repositoryGenericInterface = new FrugtRepositoryUsingGenericInterface();
+NyFrugt nybanan = new NyFrugt(4, "Banan", 5.50);
+NyFrugt nyæble = new NyFrugt(6, "Æble", 3.50);
+repositoryGenericInterface.Create(nybanan);
+repositoryGenericInterface.Create(nyæble);
 
 
 Console.WriteLine("===== Udskriv Alle =====");
-foreach (Frugt frugt in repositoryGenericInterface.GetAll())
+foreach (NyFrugt frugt in repositoryGenericInterface.GetAll())
 {
     Console.WriteLine(frugt);
 }
 
 Console.WriteLine("===== Update Æble =====");
-Frugt æble22 = new Frugt(6, "Æble", 1.50);
-repositoryGenericInterface.Update(6, æble2);
+NyFrugt nyæble22 = new NyFrugt(6, "Æble", 1.50);
+repositoryGenericInterface.Update(6, nyæble22);
 Console.WriteLine(repositoryGenericInterface.GetById(6));
 
 Console.WriteLine("===== Sletter Æble =====");
-Frugt f2 = repositoryGenericInterface.Delete(6);
-Console.WriteLine(f2);
+NyFrugt nyf2 = repositoryGenericInterface.Delete(6);
+Console.WriteLine(nyf2);
 
 try
 {
-    Frugt frugt = repositoryGenericInterface.Delete(6);
+    NyFrugt frugt = repositoryGenericInterface.Delete(6);
+}
+catch (KeyNotFoundException knfe)
+{
+    Console.WriteLine(knfe.Message);
+}
+
+
+/*
+ * Prøver Generic Repository med NyFrugt
+ */
+IRepositoryGeneric<NyFrugt> genericRepo = new RepositoryGeneric<NyFrugt>();
+genericRepo.Create(nybanan);
+genericRepo.Create(nyæble);
+
+
+Console.WriteLine("===== Udskriv Alle =====");
+foreach (NyFrugt frugt in genericRepo.GetAll())
+{
+    Console.WriteLine(frugt);
+}
+
+Console.WriteLine("===== Update Æble =====");
+nyæble22 = new NyFrugt(6, "Æble", 1.50);
+genericRepo.Update(6, nyæble22);
+Console.WriteLine(genericRepo.GetById(6));
+
+Console.WriteLine("===== Sletter Æble =====");
+nyf2 = genericRepo.Delete(6);
+Console.WriteLine(nyf2);
+
+try
+{
+    NyFrugt frugt = genericRepo.Delete(6);
 }
 catch (KeyNotFoundException knfe)
 {

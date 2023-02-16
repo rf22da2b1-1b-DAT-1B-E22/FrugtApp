@@ -7,37 +7,37 @@ using System.Threading.Tasks;
 
 namespace FrugtLib.model
 {
-    public class FrugtRepositoryUsingGenericInterface:IRepositoryGeneric<Frugt>
+    public class FrugtRepositoryUsingGenericInterface:IRepositoryGeneric<NyFrugt>
     {
-        private readonly List<Frugt> _repository;
+        private readonly List<NyFrugt> _repository;
 
         public FrugtRepositoryUsingGenericInterface()
         {
-            _repository = new List<Frugt>();
+            _repository = new List<NyFrugt>();
         }
 
-        public Frugt Create(Frugt frugt)
+        public NyFrugt Create(NyFrugt frugt)
         {
             _repository.Add(frugt);
             return frugt;
         }
 
-        public Frugt Delete(int id)
+        public NyFrugt Delete(int id)
         {
-            Frugt frugt = GetById(id);
+            NyFrugt frugt = GetById(id);
 
             _repository.Remove(frugt);
             return frugt;
         }
 
-        public List<Frugt> GetAll()
+        public List<NyFrugt> GetAll()
         {
-            return new List<Frugt>(_repository);
+            return new List<NyFrugt>(_repository);
         }
 
-        public Frugt GetById(int id)
+        public NyFrugt GetById(int id)
         {
-            foreach (Frugt f in _repository)
+            foreach (NyFrugt f in _repository)
             {
                 if (f.Id == id)
                 {
@@ -48,9 +48,9 @@ namespace FrugtLib.model
             throw new KeyNotFoundException();
         }
 
-        public Frugt Update(int id, Frugt frugt)
+        public NyFrugt Update(int id, NyFrugt frugt)
         {
-            Frugt updateFrugt = GetById(id);
+            NyFrugt updateFrugt = GetById(id);
 
             int ix = _repository.IndexOf(updateFrugt);
             _repository[ix] = frugt;
